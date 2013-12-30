@@ -19,25 +19,5 @@
  *
 */
 
-var pushpath = require('pushpath');
-var execProxy = require('pushpath/exec/proxy');
-
-module.exports = function(success, fail, service, action, args) {
-    var proxy = execProxy.get(service,action);
-    if(proxy) {
-        var callbackId = service + pushpath.callbackId++;
-        //console.log("EXEC:" + service + " : " + action);
-        if (typeof success == "function" || typeof fail == "function") {
-            pushpath.callbacks[callbackId] = {success:success, fail:fail};
-        }
-        try {
-            proxy(success, fail, args);
-        }
-        catch(e) {
-            console.log("Exception calling native with command :: " + service + " :: " + action  + " ::exception=" + e);
-        }
-    }
-    else {
-        fail && fail("Missing Command Error");
-    }
-};
+console.log('WARNING: please require pushpath/exec/proxy instead');
+module.exports = require('pushpath/exec/proxy');

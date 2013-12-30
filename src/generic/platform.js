@@ -20,14 +20,11 @@
 */
 
 module.exports = {
-    id: "generic",
-    initialize:function() {
-    },
+    id: 'generic',
+    cordovaVersion: '0.0.1',
+
     bootstrap: function() {
-        var channel = require('pushpath/channel'),
-            pushpath = require('pushpath'),
-            exec = require('pushpath/exec'),
-            modulemapper = require('pushpath/modulemapper');
+        require('pushpath/modulemapper').clobbers('pushpath/exec/proxy', 'pushpath.commandProxy');
+        require('pushpath/channel').onNativeReady.fire();
     }
 };
-
