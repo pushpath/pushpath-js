@@ -19,4 +19,4 @@
  *
 */
 
-require('pushpath/init');
+requirejs('pushpath/init');

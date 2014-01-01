@@ -19,8 +19,8 @@
  *
 */
 
-var exec = require('pushpath/exec');
-var utils = require('pushpath/utils');
+var exec = requirejs('pushpath/exec');
+var utils = requirejs('pushpath/utils');
 
 var moduleExports = module.exports;
 

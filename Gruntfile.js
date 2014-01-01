@@ -28,7 +28,6 @@ module.exports = function(grunt) {
 
     // external tasks
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // custom tasks
     grunt.loadTasks('tasks');

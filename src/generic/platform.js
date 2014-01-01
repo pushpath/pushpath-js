@@ -24,7 +24,13 @@ module.exports = {
     cordovaVersion: '0.0.1',
 
     bootstrap: function() {
-        require('pushpath/modulemapper').clobbers('pushpath/exec/proxy', 'pushpath.commandProxy');
-        require('pushpath/channel').onNativeReady.fire();
+        var modulemapper = requirejs('pushpath/modulemapper');
+
+        modulemapper.clobbers('pushpath', 'pushpath');
+        modulemapper.clobbers('pushpath/config', 'pushpath.config');
+        modulemapper.clobbers('pushpath/plugin/vagrant', 'pushpath.vagrant');
+
+        modulemapper.mapModules(global); // FIXME: might break node internals (?)
     }
 };
+

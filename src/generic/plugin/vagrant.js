@@ -17,16 +17,15 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
-
-
-/**
- * For already absolute URLs, returns what is passed in.
- * For relative URLs, converts them to absolute ones.
  */
-exports.makeAbsolute = function makeAbsolute(url) {
-    var anchorEl = document.createElement('a');
-    anchorEl.href = url;
-    return anchorEl.href;
-};
 
+module.exports = {
+    init: function() {
+        console.log('initialising vagrant directory...');
+    },
+    destroy: function(){},
+    halt: function(){},
+    provision: function(){},
+    resume: function(){},
+    reload: function(){}
+};

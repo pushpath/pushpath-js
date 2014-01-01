@@ -20,4 +20,4 @@
 */
 
 console.log('WARNING: please require pushpath/exec/proxy instead');
-module.exports = require('pushpath/exec/proxy');
+module.exports = requirejs('pushpath/exec/proxy');

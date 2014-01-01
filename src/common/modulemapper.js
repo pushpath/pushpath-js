@@ -18,7 +18,7 @@
  *
 */
 
-var builder = require('pushpath/builder'),
+var builder = requirejs('pushpath/builder'),
     moduleMap = define.moduleMap,
     symbolList,
     deprecationMap;
@@ -73,7 +73,7 @@ exports.mapModules = function(context) {
     for (var i = 0, len = symbolList.length; i < len; i += 3) {
         var strategy = symbolList[i];
         var moduleName = symbolList[i + 1];
-        var module = require(moduleName);
+        var module = requirejs(moduleName);
         // <runs/>
         if (strategy == 'r') {
             continue;

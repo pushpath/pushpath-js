@@ -17,28 +17,31 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
-
-// internal map of proxy function
-var CommandProxyMap = {};
+var path = require('path'),
+    fs = require('fs');
 
 module.exports = {
 
-    add:function(id,proxyObj) {
-        console.log("adding proxy for " + id);
-        CommandProxyMap[id] = proxyObj;
-        return proxyObj;
+    projectDir: function(successCB, failCB) {
+        var projectDir = process.cwd();
+
+        if (path.existsSync(projectDir)) {
+            successCB(projectDir);
+        } else {
+            failCB({code: pushpath.callbackStatus.ILLEGAL_ACCESS_EXCEPTION, message: "Unable to read Pushpath project directory"});
+        }
     },
 
-    remove:function(id) {
-        var proxy = CommandProxyMap[id];
-        delete CommandProxyMap[id];
-        CommandProxyMap[id] = null;
-        return proxy;
-    },
+    dotDir: function(successCB, failCB){
+        var projectDir = process.cwd();
+            dotDir = path.join(projectDir, ".pushpath");
 
-    get:function(service,action) {
-        return ( CommandProxyMap[service] ? CommandProxyMap[service][action] : null );
+        if (path.existsSync(dotDir)) {
+            successCB(dotDir);
+        } else {
+            failCB({code:pushpath.callbackStatus.IO_EXCEPTION, message: "Pushpath directory doesn't exist."});
+        }
     }
 };

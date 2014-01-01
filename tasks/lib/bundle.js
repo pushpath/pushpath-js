@@ -65,7 +65,7 @@ module.exports = function bundle(platform, debug, commitId) {
         writeModule(output, modules[moduleId], moduleId, debug)
     }
 
-    output.push("window.pushpath = require('pushpath');")
+    output.push("global.pushpath = requirejs('pushpath');")
 
     // write final scripts
     if (!scripts['bootstrap']) {

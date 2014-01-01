@@ -19,7 +19,7 @@
  *
 */
 
-var utils = require('pushpath/utils');
+var utils = requirejs('pushpath/utils');
 
 function each(objects, func, context) {
     for (var prop in objects) {
@@ -56,7 +56,7 @@ function assignOrWrapInDeprecateGetter(obj, key, value, message) {
 function include(parent, objects, clobber, merge) {
     each(objects, function (obj, key) {
         try {
-            var result = obj.path ? require(obj.path) : {};
+            var result = obj.path ? requirejs(obj.path) : {};
 
             if (clobber) {
                 // Clobber if it doesn't exist.

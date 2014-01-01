@@ -42,10 +42,10 @@ module.exports = function generate(platform, useWindowsLineEndings, callback) {
             fs.mkdirSync('pkg/debug');
         }
 
-        outFile = path.join('pkg', 'pushpath.' + platform + '.js');
+        outFile = path.join('pkg', 'pushpath-' + commitId + '.js');
         fs.writeFileSync(outFile, libraryRelease, 'utf8');
         
-        outFile = path.join('pkg', 'debug', 'pushpath.' + platform + '-debug.js');
+        outFile = path.join('pkg', 'debug', 'pushpath.' + '-debug.js');
         fs.writeFileSync(outFile, libraryDebug, 'utf8');
         
         console.log('generated pushpath.' + platform + '.js @ ' + commitId + ' in ' + time + 'ms');

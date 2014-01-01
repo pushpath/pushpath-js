@@ -30,7 +30,7 @@ module.exports = function writeModule(oFile, fileName, moduleId, debug) {
 	// Windows fix, '\' is an escape, but defining requires '/' -jm
     moduleId = path.join('pushpath', moduleId).split("\\").join("/");
     
-    var signature = 'function(require, exports, module)';
+    var signature = 'function(requirejs, exports, module)';
     
     contents = 'define("' + moduleId + '", ' + signature + ' {' + contents + '});\n'
 

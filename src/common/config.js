@@ -17,6 +17,4 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
-
-throw new Error('should have been replaced at build time with platform implementation');
+ */

@@ -19,10 +19,11 @@
  *
 */
 
-/*jshint -W079 */
-/*jshint -W020 */
+/**
+ * A modified require.js library based of from Apache Cordova project
+ */
 
-var require,
+var requirejs,
     define;
 
 (function () {
@@ -43,7 +44,7 @@ var require,
                 if (id.charAt(0) === ".") {
                     resultantId = module.id.slice(0, module.id.lastIndexOf(SEPARATOR)) + SEPARATOR + id.slice(2);
                 }
-                return require(resultantId);
+                return requirejs(resultantId);
             };
         module.exports = {};
         delete module.factory;
@@ -51,12 +52,12 @@ var require,
         return module.exports;
     }
 
-    require = function (id) {
+    requirejs = function (id) {
         if (!modules[id]) {
             throw "module " + id + " not found";
         } else if (id in inProgressModules) {
             var cycle = requireStack.slice(inProgressModules[id]).join('->') + '->' + id;
-            throw "Cycle in require graph: " + cycle;
+            throw "Cycle in requirejs graph: " + cycle;
         }
         if (modules[id].factory) {
             try {
@@ -90,7 +91,6 @@ var require,
 })();
 
 //Export for use in node
-if (typeof module === "object" && typeof require === "function") {
-    module.exports.require = require;
-    module.exports.define = define;
-}
+module.exports.requirejs = requirejs;
+module.exports.define = define;
+
