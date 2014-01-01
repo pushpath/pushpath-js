@@ -18,3 +18,49 @@
  * under the License.
  *
  */
+
+var fs = require('fs'),
+    path = require('path');
+
+var core = requirejs('pushpath/core');
+
+var CONFIG_FILENAME = 'pushpath.json';
+
+var config_module = {
+    path: function() {
+        var config_file = path.join(pushpath.core.dotDir(), CONFIG_FILENAME);
+
+        if (fs.existsSync(config_file)) {
+            return config_file;
+        }
+        return false;
+    },
+
+    read: function() {
+        var config_file = path.join(pushpath.core.dotDir(), CONFIG_FILENAME);
+        var data = fs.readFileSync(config_file);
+
+        if (data) {
+            return JSON.parse(data);
+        }
+
+        return false;
+    },
+
+    write: function(data) {
+        var config_file = path.join(pushpath.core.dotDir(), CONFIG_FILENAME);
+
+        fs.writeFileSync(config_file, JSON.stringify(data, null, 4));
+    },
+
+    update: function(data) {
+        var config_file = path.join(pushpath.core.dotDir(), CONFIG_FILENAME),
+            config_data = JSON.parse(fs.readFileSync(config_file));
+
+        var merged_data = JSON.parse((JSON.stringify(config_data) + JSON.stringify(data)).replace(/}{/g,","));
+
+        fs.writeFileSync(config_file, JSON.stringify(merged_data, null, 4));
+    }
+};
+
+module.exports = config_module;

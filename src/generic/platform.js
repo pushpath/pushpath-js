@@ -27,6 +27,8 @@ module.exports = {
         var modulemapper = requirejs('pushpath/modulemapper');
 
         modulemapper.clobbers('pushpath', 'pushpath');
+        modulemapper.merges('pushpath/core', 'pushpath');
+
         modulemapper.clobbers('pushpath/config', 'pushpath.config');
         modulemapper.clobbers('pushpath/plugin/vagrant', 'pushpath.vagrant');
 

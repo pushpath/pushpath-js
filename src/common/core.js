@@ -24,24 +24,25 @@ var path = require('path'),
 
 module.exports = {
 
-    projectDir: function(successCB, failCB) {
+    projectDir: function() {
         var projectDir = process.cwd();
 
-        if (path.existsSync(projectDir)) {
-            successCB(projectDir);
-        } else {
-            failCB({code: pushpath.callbackStatus.ILLEGAL_ACCESS_EXCEPTION, message: "Unable to read Pushpath project directory"});
+        if (fs.existsSync(projectDir)) {
+            return projectDir;
         }
+
+        return false;
     },
 
-    dotDir: function(successCB, failCB){
+    dotDir: function(){
         var projectDir = process.cwd();
             dotDir = path.join(projectDir, ".pushpath");
 
-        if (path.existsSync(dotDir)) {
-            successCB(dotDir);
-        } else {
-            failCB({code:pushpath.callbackStatus.IO_EXCEPTION, message: "Pushpath directory doesn't exist."});
+        if (fs.existsSync(dotDir)) {
+            return dotDir;
         }
+
+        return false;
     }
+
 };

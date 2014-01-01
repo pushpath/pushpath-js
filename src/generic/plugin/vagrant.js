@@ -19,9 +19,19 @@
  *
  */
 
+var exec = require('child_process').exec;
+
 module.exports = {
     init: function() {
-        console.log('initialising vagrant directory...');
+    },
+    up: function() {
+        cmd = exec('vagrant up',
+            function(error, stdout, stderr){
+                console.log(stdout);
+                if (error !== null) {
+                    console.log('[ERROR] ' + stderr);
+                }
+            });
     },
     destroy: function(){},
     halt: function(){},
