@@ -21,7 +21,7 @@
 
 module.exports = {
     id: 'generic',
-    cordovaVersion: '0.0.1',
+    pushpathVersion: '0.0.1',
 
     bootstrap: function() {
         var modulemapper = requirejs('pushpath/modulemapper');
@@ -31,6 +31,7 @@ module.exports = {
 
         modulemapper.clobbers('pushpath/config', 'pushpath.config');
         modulemapper.clobbers('pushpath/plugin/vagrant', 'pushpath.vagrant');
+        modulemapper.clobbers('pushpath/plugin/file', 'pushpath.file');
 
         modulemapper.mapModules(global); // FIXME: might break node internals (?)
     }
