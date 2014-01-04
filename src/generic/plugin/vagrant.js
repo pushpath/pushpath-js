@@ -19,23 +19,78 @@
  *
  */
 
-var exec = require('child_process').exec;
+var exec = require('child_process').exec,
+    fs = require('fs'),
+    path = require('path');
 
-module.exports = {
+var core = requirejs('pushpath/core');
+
+var VAGRANTFILE = 'Vagrantfile';
+
+var vagrant = {
     init: function() {
+        var cmd = 'vagrant init';
+
+        this.exec(cmd);
     },
     up: function() {
-        cmd = exec('vagrant up',
-            function(error, stdout, stderr){
-                console.log(stdout);
-                if (error !== null) {
-                    console.log('[ERROR] ' + stderr);
-                }
-            });
+        var cmd = 'vagrant up';
+
+        this.exec(cmd);
     },
     destroy: function(){},
     halt: function(){},
     provision: function(){},
     resume: function(){},
-    reload: function(){}
+    reload: function(){},
+    exec: function(cmd) {
+        if (cmd) {
+            exec(cmd,
+                function(error, stdout, stderr){
+                    console.log(stdout);
+                    if (error !== null) {
+                        console.log('[ERROR] ' + stderr);
+                    }
+                });
+            return true;
+        }
+        return false;
+    },
+    readTemplate: function() {
+        var dotDir = core.dotDir();
+        var templateFullPath = path.join(dotDir, VAGRANTFILE);
+
+        var data = fs.readFileSync(templateFullPath);
+
+        return data;
+    },
+    applyConfig: function() {
+        var projectDir = core.projectDir();
+
+        var vagrantfileTemplateData = this.readTemplate();
+        var config = requirejs('pushpath/config').read();
+
+        var dotjs = require('dot');
+        dotjs.templateSettings['varname'] = 'tpl';
+        dotjs.templateSettings['strip'] = false;
+        var dotFunc = dotjs.template(vagrantfileTemplateData);
+
+        var vagrantfileData = dotFunc({
+            config_vm_box: config.plugins.vagrant.config['config_vm_box'],
+            config_vm_box_url: config.plugins.vagrant.config['config_vm_box_url'],
+
+            network_type: config.plugins.vagrant.config['network']['network_type'],
+            network_ip: config.plugins.vagrant.config['network']['network_ip'],
+
+            provider_type: config.plugins.vagrant.config['provider']['type'],
+            provider_name: config.plugins.vagrant.config['provider']['name']
+        });
+
+        var File = requirejs('pushpath/plugin/file');
+        var FileWriter = new File(VAGRANTFILE, projectDir);
+
+        FileWriter.write(vagrantfileData);
+    }
 };
+
+module.exports = vagrant;
