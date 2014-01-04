@@ -38,11 +38,31 @@ var vagrant = {
 
         this.exec(cmd);
     },
-    destroy: function(){},
-    halt: function(){},
-    provision: function(){},
-    resume: function(){},
-    reload: function(){},
+    destroy: function(){
+        var cmd = 'vagrant destroy';
+
+        this.exec(cmd);
+    },
+    halt: function(){
+        var cmd = 'vagrant halt';
+
+        this.exec(cmd);
+    },
+    provision: function(){
+        var cmd = 'vagrant provision';
+
+        this.exec(cmd);
+    },
+    resume: function(){
+        var cmd = 'vagrant resume';
+
+        this.exec(cmd);
+    },
+    suspend: function(){
+        var cmd = 'vagrant suspend';
+
+        this.exec(cmd);
+    },
     exec: function(cmd) {
         if (cmd) {
             exec(cmd,
