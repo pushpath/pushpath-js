@@ -39,7 +39,7 @@ var vagrant = {
         this.exec(cmd);
     },
     destroy: function(){
-        var cmd = 'vagrant destroy';
+        var cmd = 'vagrant destroy -f';
 
         this.exec(cmd);
     },
