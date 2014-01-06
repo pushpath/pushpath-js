@@ -20,18 +20,15 @@
  */
 
 var path = require('path'),
-    fs = require('fs');
+    fs = require('fs'),
+    shell = require('shelljs');
 
 module.exports = {
 
     projectDir: function() {
         var projectDir = process.cwd();
 
-        if (fs.existsSync(projectDir)) {
-            return projectDir;
-        }
-
-        return false;
+        return projectDir;
     },
 
     dotDir: function(){
@@ -43,6 +40,20 @@ module.exports = {
         }
 
         return false;
-    }
+    },
 
+    rootDir: function() {
+        var rootDir = path.resolve(__dirname + '/../../');
+
+        return rootDir;
+    },
+
+    setupProject: function() {
+        var rootDir = this.rootDir(),
+            projectDir = this.projectDir();
+
+        shell.mkdir('-p', path.join(projectDir, '.pushpath'));
+        shell.cp('-f', path.join(rootDir, '/templates/', 'pushpath.json'), path.join(projectDir, '.pushpath/'));
+        shell.cp('-f', path.join(rootDir, '/templates/', 'Vagrantfile'), path.join(projectDir, '.pushpath/'))
+    }
 };
