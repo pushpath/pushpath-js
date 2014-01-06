@@ -32,7 +32,8 @@ module.exports = {
         modulemapper.clobbers('pushpath/config', 'pushpath.config');
         modulemapper.clobbers('pushpath/plugin/vagrant', 'pushpath.vagrant');
         modulemapper.clobbers('pushpath/plugin/file', 'pushpath.file');
-
+        modulemapper.clobbers('pushpath/utils', 'pushpath.utils');
+        
         modulemapper.mapModules(global); // FIXME: might break node internals (?)
     }
 };
