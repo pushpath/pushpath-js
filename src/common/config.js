@@ -37,13 +37,16 @@ var config_module = {
     },
 
     read: function() {
-        var config_file = path.join(core.dotDir(), CONFIG_FILENAME);
-        var data = fs.readFileSync(config_file);
+        var dotDir = core.dotDir();
 
-        if (data) {
-            return JSON.parse(data);
+        if (dotDir) {
+            var config_file = path.join(dotDir, CONFIG_FILENAME);
+            var data = fs.readFileSync(config_file);
+
+            if (data) {
+                return JSON.parse(data);
+            }
         }
-
         return false;
     },
 
