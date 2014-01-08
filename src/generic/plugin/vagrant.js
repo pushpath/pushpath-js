@@ -65,14 +65,10 @@ var vagrant = {
     },
     exec: function(cmd) {
         if (cmd) {
-            exec(cmd,
-                function(error, stdout, stderr){
-                    console.log(stdout);
-                    if (error !== null) {
-                        console.log('[ERROR] ' + stderr);
-                    }
-                });
-            return true;
+            var result = exec(cmd, {silent: true});
+            if (result) {
+                return result;
+            }
         }
         return false;
     },
@@ -110,6 +106,24 @@ var vagrant = {
         var FileWriter = new File(VAGRANTFILE, projectDir);
 
         FileWriter.write(vagrantfileData);
+    },
+    status: function() {
+        var cmd = 'vagrant status',
+            strSeparator = '\n\n',
+            statusIdx = 1;
+
+        var result = this.exec(cmd);
+        if (result) {
+            var status;
+
+            status = result.output.split(strSeparator);
+            status = status[statusIdx].replace(/ +(?= )/g,'');
+
+            if (status) {
+                return status;
+            }
+        }
+        return false;
     }
 };
 
