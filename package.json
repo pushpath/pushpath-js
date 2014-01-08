@@ -1,13 +1,23 @@
 {
-    "name": "pushpath-js",
-    "description": "tba",
-    "version": "0.0.1",
+    "name": "pushpathjs",
+    "version": "0.1.0",
+    "author": "Richard Sentino <richard@mindginative.com>",
+    "homepage": "http://pushpath.github.io/home",
+    "description": "A Node.js unified Javascript library for Pushpath project.",
     "engines": {
         "node": "~0.6.15"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pushpath/pushpath-js.git"
+    },
+    "bugs": {
+        "url": "https://github.com/pushpath/pushpath-js/issues"
     },
     "devDependencies": {
         "grunt": "~0.4.1",
         "grunt-contrib-clean": "~0.4.1",
         "grunt-contrib-jshint": "~0.6.0"
-    }
+    },
+    "license": "Apache-2.0"
 }
