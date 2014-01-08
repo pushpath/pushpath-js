@@ -1,0 +1,14 @@
+0.1.0 (Jan-2014)
+-----
+
+* Initial support for Vagrant VM CLI operation (up, suspend, destroy, resume, provision, status)
+* JSON-based configuration w/ support of the following operation eg. read, write, update
+* Create new project
+* Using a stripped down Cordova-js build tools and library
+* Core module to detect project directory, pushpath root directory eg. /.pushpath
+* Generate Vagrantfile configuration based on Pushpath's (pushpath.json) configuration data
+
+0.0.1
+-----
+
+Somewhere at the beginning of December, 2013. This isn't the stable version as these are all lies and deceit.
