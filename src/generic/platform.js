@@ -21,7 +21,7 @@
 
 module.exports = {
     id: 'generic',
-    pushpathVersion: '0.0.1',
+    pushpathVersion: '0.1.0',
 
     bootstrap: function() {
         var modulemapper = requirejs('pushpath/modulemapper');
