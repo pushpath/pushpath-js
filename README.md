@@ -1,3 +1,6 @@
+### This repo has been discontinued, please refer to the unified [Pushpath](https://github.com/pushpath/pushpath) project
+
+
 A [Node.js](http://nodejs.org) unified Javascript library for Pushpath project
 
 ### Build Requirements
